@@ -2,11 +2,14 @@
 
 echo "Welcome to empComputation"
 
-a=$(( RANDOM % 2 ))
+isPresent=1
+randomCheck=$((RANDOM%2))
 
-if [ $a -eq 1 ]
+if [ $isPresent -eq $randomCheck ]
 then
-        echo "emp present"
+     empRatePerHr=20
+     empHrs=8;
+     salary=$(( $empHrs * $empRatePerHr ))
 else
-        echo "emp absent"
+    salary=0
 fi
