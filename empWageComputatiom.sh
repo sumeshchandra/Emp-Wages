@@ -8,7 +8,7 @@ max_Hrs_in_month=10
 empRatePerHr=20
 num_Working_Days=20;
 
-
+declare -a empWageArray
 totalEmpHr=0
 totalWorkingDays=0
 function getWorkingHours(){
@@ -26,14 +26,15 @@ function getWorkingHours(){
       esac
       echo $workingHours
 }
+
 while [[ $totalWorkingHours -le $max_Hrs_in_month  &&  $totalWorkingDays -le $num_Working_Days ]]
 do
 
     (( totalWorkingDays++ ))
      workingHours="$( getWorkingHours $((RANDOM%3)) )"
-
-
-      totalWorkingHours=$(( $totalWorkingHours + $workingHours ))
-
+     totalWorkingHours=$(( $totalWorkingHours + $workingHours ))
+     empWageArray[$totalWorkingDays]=$(( $workingHours * $empRatePerHr ))
 done
 totalSalary=$(( $totalWorkingHours * $empRatePerHr ))
+echo "Day ${!empWageArray[@]}"
+echo "Daily wages : ${empWageArray[@]}"
