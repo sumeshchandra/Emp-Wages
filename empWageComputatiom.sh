@@ -8,7 +8,7 @@ max_Hrs_in_month=10
 empRatePerHr=20
 num_Working_Days=20;
 
-declare -a empWageArray
+declare -a empWageDict
 totalEmpHr=0
 totalWorkingDays=0
 function getWorkingHours(){
@@ -33,8 +33,12 @@ do
     (( totalWorkingDays++ ))
      workingHours="$( getWorkingHours $((RANDOM%3)) )"
      totalWorkingHours=$(( $totalWorkingHours + $workingHours ))
-     empWageArray[$totalWorkingDays]=$(( $workingHours * $empRatePerHr ))
+     empWageDict["$totalWorkingDays"]=$(( $workingHours * $empRatePerHr ))
 done
 totalSalary=$(( $totalWorkingHours * $empRatePerHr ))
-echo "Day ${!empWageArray[@]}"
-echo "Daily wages : ${empWageArray[@]}"
+echo "Day ${!empWageDict[@]}"
+echo "Daily wages : ${empWageDict[@]}"
+for key in ${!empWageDict[@]}
+do
+echo "$key:${empWageDict[$key]}"
+done
